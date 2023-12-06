@@ -1,3 +1,9 @@
+import java.util.Scanner
+
+val scanner = Scanner(System.`in`)
 fun main(args: Array<String>) {
-    println("Hello World!")
+
+    Archive.selectArchive.selection(Archive.listArchives)
+    scanner.close()
 }
+

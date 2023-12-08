@@ -5,10 +5,13 @@ class Select<T>(private val name: String, private val type: String) where T : Me
         private var itemArchive = -1
     }
 
-    fun <T: Menu> selection(list: MutableList<T>) {
+    fun <T : Menu> selection(list: MutableList<T>) {
         while (true) {
             println(name)
-            println("0. Создать архив/заметку")
+            println(
+                if (type == "archive") "0. Создать архив"
+                else "0. Создать заметку"
+            )
 
             if (list.isNotEmpty()) {
                 list.forEach { println("${list.indexOf(it) + 1}. ${it.name}") }
@@ -24,7 +27,7 @@ class Select<T>(private val name: String, private val type: String) where T : Me
                     continue
                 }
             } else {
-                scanner.nextLine()
+                scanner.next()
                 println("Неверный ввод, выберете соотвествующий пункт меню.")
                 continue
             }
@@ -69,7 +72,7 @@ class Select<T>(private val name: String, private val type: String) where T : Me
     }
 
 
-    private fun <T: Menu> showContent(t: T) {
+    private fun <T : Menu> showContent(t: T) {
         if (t is Archive) {
             Note.selectNote.selection(Archive.listArchives[point - 1].listOfNotes)
         } else if (t is Note) {
